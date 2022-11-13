@@ -4,6 +4,7 @@ using InterkontinentalAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InterkontinentalAPI.Migrations
 {
     [DbContext(typeof(InterkontinentalContext))]
-    partial class InterkontinentalContextModelSnapshot : ModelSnapshot
+    [Migration("20221113095946_ChangeSeededData")]
+    partial class ChangeSeededData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

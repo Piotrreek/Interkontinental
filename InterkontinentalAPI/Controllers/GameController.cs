@@ -13,6 +13,16 @@ namespace InterkontinentalAPI.Controllers
             _gameService = gameService;
         }
 
+        [HttpGet("get-active-game")]
+        public async Task<IActionResult> GetActiveGame()
+        {
+            var gameId = await _gameService.GetActiveGameId();
+            if (gameId == 0)
+                return NotFound();
+
+            return Ok(gameId);
+        }
+
         [HttpGet("create")]
         public async Task<IActionResult> CreateGame()
         {
@@ -57,6 +67,13 @@ namespace InterkontinentalAPI.Controllers
             var fields = await _gameService.GetFields();
 
             return Ok(fields);
+        }
+
+        [HttpGet("{gameId:int}/get-active-counters")]
+        public async Task<IActionResult> GetActiveCounters([FromRoute] int gameId)
+        {
+            var counterDtos = await _gameService.GetCounters(gameId);
+            return Ok(counterDtos);
         }
     }
 }

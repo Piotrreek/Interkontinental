@@ -4,6 +4,7 @@ using InterkontinentalAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InterkontinentalAPI.Migrations
 {
     [DbContext(typeof(InterkontinentalContext))]
-    partial class InterkontinentalContextModelSnapshot : ModelSnapshot
+    [Migration("20221112231110_AddTypeColumnForField")]
+    partial class AddTypeColumnForField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +171,7 @@ namespace InterkontinentalAPI.Migrations
                         {
                             Id = 17,
                             Name = "Szansa 2",
-                            Type = "Szansy"
+                            Type = "Inne"
                         },
                         new
                         {
@@ -241,7 +243,7 @@ namespace InterkontinentalAPI.Migrations
                         {
                             Id = 29,
                             Name = "Szansa 3",
-                            Type = "Szansy"
+                            Type = "Inne"
                         },
                         new
                         {
@@ -295,7 +297,7 @@ namespace InterkontinentalAPI.Migrations
                         {
                             Id = 38,
                             Name = "Zanzibar",
-                            Type = "Egipt"
+                            Type = "Australia"
                         },
                         new
                         {
@@ -325,7 +327,7 @@ namespace InterkontinentalAPI.Migrations
                         {
                             Id = 43,
                             Name = "Szansa 4",
-                            Type = "Szansy"
+                            Type = "Inne"
                         },
                         new
                         {

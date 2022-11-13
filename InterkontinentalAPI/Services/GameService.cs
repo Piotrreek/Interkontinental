@@ -1,6 +1,7 @@
 ﻿using InterkontinentalAPI.Entities;
 using InterkontinentalAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace InterkontinentalAPI.Services
 {
@@ -8,9 +9,11 @@ namespace InterkontinentalAPI.Services
     {
         Task<int> Create();
         Task<bool> End(int id);
-        Task<List<FieldDto>> GetFields();
+        Task<List<IGrouping<string, FieldDto>>> GetFields();
         Task<int> Increment(int gameId, int fieldId);
         Task<int> Decrement(int gameId, int fieldId);
+        Task<int> GetActiveGameId();
+        Task<List<CounterDto>> GetCounters(int gameId);
     }
 
     public class GameService : IGameService
@@ -55,7 +58,7 @@ namespace InterkontinentalAPI.Services
             return true;
         }
 
-        public async Task<List<FieldDto>> GetFields()
+        public async Task<List<IGrouping<string, FieldDto>>> GetFields()
         {
             var fields = await _context.Fields
                 .AsNoTracking()
@@ -64,7 +67,10 @@ namespace InterkontinentalAPI.Services
             {
                 Id = f.Id,
                 Name = f.Name,
-            }).ToList();
+                Type = f.Type
+            })
+                .GroupBy(fd => fd.Type)
+                .ToList();
 
             return fieldsDtos;
         }
@@ -93,6 +99,28 @@ namespace InterkontinentalAPI.Services
             await _context.SaveChangesAsync();
 
             return counter.Count;
+        }
+
+        public async Task<int> GetActiveGameId()
+        {
+            var game = await _context.Games
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.HasEnded == false);
+            return game?.Id ?? 0;
+        }
+
+        public async Task<List<CounterDto>> GetCounters(int gameId)
+        {
+            var counters = await _context.Counters
+                .AsNoTracking()
+                .Where(c => c.GameId == gameId)
+                .ToListAsync();
+
+            return counters.Select(c => new CounterDto
+            {
+                Count = c.Count,
+                FieldId = c.FieldId
+            }).ToList();
         }
     }
 }
