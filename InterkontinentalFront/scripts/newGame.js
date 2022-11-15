@@ -3,10 +3,7 @@ import { getActiveCounters, getNewGame } from './api.js'
 import { newGameContent } from './elements.js'
 
 export const addNewGame = async () => {
-    const gId = await getNewGame()
-    await loadStatisticsOrNewGame(gameId)
-
-    return gId
+    return await getNewGame()
 }
 
 export const showNewGameFields = async () => {
