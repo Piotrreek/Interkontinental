@@ -52,7 +52,10 @@ const createEndGameButton = () => {
 }
 
 export const listen = () => {
-    newGameButton.addEventListener('click', async () => gameId = await addNewGame())
+    newGameButton.addEventListener('click', async () => {
+        gameId = await addNewGame()
+        await loadStatisticsOrNewGame(gameId)
+    })
     loadMoreStatisticsBtn.addEventListener('click', async () => await loadStatisticsForMoreGames())
     loadAllStatisticsBtn.addEventListener('click', async () => await loadAllGames())
     goTop.addEventListener('click', () => goToTop())
