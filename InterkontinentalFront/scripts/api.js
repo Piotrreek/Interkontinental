@@ -25,7 +25,7 @@ export const getActiveGame = async () => {
     var res = await fetch(`${baseURL}game/get-active-game`)
     if(res.status === 404)
         return 0;
-    data = await res.text()
+    const data = await res.text()
 
     return data
 }
