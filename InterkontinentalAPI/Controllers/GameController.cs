@@ -75,5 +75,20 @@ namespace InterkontinentalAPI.Controllers
             var counterDtos = await _gameService.GetCounters(gameId);
             return Ok(counterDtos);
         }
+
+        [HttpGet("get-statistics")]
+        public async Task<IActionResult> GetStatistics([FromQuery] int start = 0, [FromQuery] int end = 2)
+        {
+            var statistics = await _gameService.GetStatistics(start, end);
+            return Ok(statistics);
+        }
+
+        [HttpGet("number-of-games")]
+        public async Task<IActionResult> GetNumberOfGames()
+        {
+            var numberOfGames = _gameService.GetNumberOfGames();
+
+            return Ok(numberOfGames);
+        }
     }
 }

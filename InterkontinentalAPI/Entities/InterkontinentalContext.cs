@@ -26,10 +26,6 @@ namespace InterkontinentalAPI.Entities
                 .HasForeignKey(c => c.GameId);
 
             modelBuilder.Entity<Game>()
-                .Property(g => g.Start)
-                .HasDefaultValueSql("getutcdate()");
-
-            modelBuilder.Entity<Game>()
                 .Property(g => g.HasEnded)
                 .HasDefaultValue(false);
 
