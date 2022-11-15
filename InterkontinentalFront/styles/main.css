@@ -1,0 +1,175 @@
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    font-size: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #292929;
+    color: #dbdbdb;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page__header {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 3.6rem;
+}
+
+.add-new-game__button, .end-new-game__button {
+    text-align: center;
+}
+
+.end-new-game__button {
+    margin-bottom: 2rem;
+}
+
+.add-new-game__button button, .end-new-game__button button {
+    font-size: 2.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+}
+
+.add-new-game__button button:hover, .end-new-game__button button:hover {
+    background-color: #9b9b9b;
+}
+
+.fa-plus {
+    padding: 0 1rem;
+}
+
+.hide {
+    display: none;
+}
+
+.add-new-game__content {
+    display: flex;
+    flex-direction: column;
+}
+.add-new-game__content h2 {
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.add-new-game__content__country {
+    padding: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.add-new-game__content__field {
+    padding: 1rem 0;
+    flex-basis: 33%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-new-game__content__field button {
+    width: 300px;
+    border-radius: 5rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.add-new-game__content__field button:hover {
+    background-color: #9b9b9b;
+}
+
+.statistics__time {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 3rem;
+}
+
+.statistics__country {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem 0;
+    font-size: 1.6rem;
+    background-color: #484a49;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.statistics__field {
+    flex-basis: 33%;
+    padding: 1rem 0;
+}
+
+.statistics__country-name {
+    text-align: center;
+    font-size: 2.6rem;
+    margin: 2rem 0;
+}
+
+.show-more-btn {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.show-more-btn button {
+    width: 100px;
+    border-radius: 50px;
+    padding: 1rem 1rem;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.show-more-btn button:hover {
+    background-color: #9b9b9b;
+}
+
+.load-more-statistics-div {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.load-more-statistics-div button {
+    padding: 2rem 1rem;
+    border-radius: 50px;
+    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.load-more-statistics-div button:hover {
+    background-color: #9b9b9b;
+}
+
+.go-top {
+    width: 100px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    background-color: #9b9b9b;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
