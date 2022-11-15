@@ -1,3 +1,12 @@
+import {loadFields} from './api.js'
+import {loadNumberOfGames} from './api.js'
+import {getNewGame} from './api.js'
+import {getActiveGame} from './api.js'
+import {getActiveCounters} from './api.js'
+import {incrementCounter} from './api.js'
+import {end} from './api.js'
+import {showStatistics} from './api.js'
+
 let newGameContent 
 let newGameDiv 
 let endGameDiv
@@ -9,7 +18,6 @@ let loadMoreStatisticsDiv
 let loadAllStatisticsBtn
 let goTop
 let container
-const baseURL = 'https://localhost:8000/'
 
 let fields 
 let gameId
@@ -42,29 +50,12 @@ const setMainHeader = (val) => {
     mainHeader.innerText = val
 }
 
-const getActiveGame = async () => {
-    var res = await fetch(`${baseURL}game/get-active-game`)
-    if(res.status === 404)
-        return 0;
-    data = await res.text()
-
-    return data
-}
-
-const getActiveCounters = async (gameId) => {
-    const res = await fetch(`${baseURL}game/${gameId}/get-active-counters`)
-    const data = await res.json()
-    return data
-}
-
 const increment = async (gameIdentifier, field, button) => {
-    var res = await fetch(`${baseURL}game/${gameIdentifier}/field-increment/${field.id}`)
-    var data = await res.text()
-
+    var data = await incrementCounter(gameIdentifier, field.id)
     button.innerHTML = field.name + '<i class="fa-solid fa-plus"></i>' + "<br/>Ilość: " + data
 }
 
-const endGame = (gameIdentifier) => {
+const endGame = async (gameIdentifier) => {
     setMainHeader('Interkontinental')
     newGameDiv.classList.toggle('hide')
     endGameDiv.classList.toggle('hide')
@@ -75,17 +66,7 @@ const endGame = (gameIdentifier) => {
     showDefaultStatistics()
     numberOfGames += 1
 
-    fetch(`${baseURL}game/end/${gameIdentifier}`)
-    .then((response) => response.text())
-    .then((data) => {
-    })
-}
-
-const getNewGame = async () => {
-    const res = await fetch(`${baseURL}game/create`)
-    const data = await res.text()
-    
-    return data
+    const endResponse = await end(gameIdentifier)
 }
 
 const addNewGame = async () => {
@@ -95,23 +76,20 @@ const addNewGame = async () => {
 
 const showDefaultStatistics = async () => {
     statisticsGameCounter = 4
-    const res = await fetch(`${baseURL}game/get-statistics?start=${statisticsGameCounter - 4}&end=${statisticsGameCounter - 2}`)
-    const data = await res.json()
+    const data = await showStatistics(statisticsGameCounter - 4, statisticsGameCounter - 2)
     
     data.map((game) => loadStatisticsSingleGame(game))
 }
 
 const loadStatisticsForMoreGames = async () => {
-    const res = await fetch(`${baseURL}game/get-statistics?start=${statisticsGameCounter - 2}&end=${statisticsGameCounter}`)
-    const data = await res.json()
+    const data = await showStatistics(statisticsGameCounter - 2, statisticsGameCounter)
     statisticsGameCounter += 2
     
     data.map((game) => loadStatisticsSingleGame(game))
 }
 
 const loadAllGames = async () => {
-    const res = await fetch(`${baseURL}game/get-statistics?start=${statisticsGameCounter - 2}&end=${numberOfGames}`)
-    const data = await res.json()
+    const data = await showStatistics(statisticsGameCounter - 2, numberOfGames)
     loadMoreStatisticsBtn.classList.add('hide')
     loadAllStatisticsBtn.classList.add('hide')
     
@@ -217,17 +195,6 @@ const listen = () => {
     goTop.addEventListener('click', () => goToTop())
 }
 
-const loadFields = async () => {
-    const res = await fetch(`${baseURL}game/fields`)
-    const data = await res.json()
-    return data;
-}
-
-const loadNumberOfGames = async () => {
-    const res = await fetch(`${baseURL}game/number-of-games`)
-    const data = await res.json()
-    return data
-}
 
 const goToTop = () => {
     window.scrollTo(0, container.offsetTop);
